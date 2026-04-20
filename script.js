@@ -79,8 +79,12 @@ const scoreElement = document.getElementById("score");
 const restartButton = document.getElementById("restart");
 const currentElement = document.getElementById("current");
 const totalElement = document.getElementById("total");
+const finalScore = document.getElementById("percent");
+const circle = document.getElementById("circle-id");
+const header = document.querySelector(".header");
 
 function showQuestion() {
+   circle.style.display = "none";
     resultElement.style.display = "none";
      totalElement.innerHTML = questions.length;
     const currentQuestion = questions[currentQuestionIndex];
@@ -108,6 +112,30 @@ function showQuestion() {
     
 
 }
+function showFinalScoreBar() {
+  const percent = (score / questions.length) * 100;
+
+  const circle = document.getElementById("inner");
+  const text = document.getElementById("percent");
+
+  const radius = 65;
+  const circumference = 2 * Math.PI * radius;
+
+  let current = 0;
+
+  const interval = setInterval(() => {
+    if (current >= percent) {
+      clearInterval(interval);
+    } else {
+      current++;
+
+      const offset = circumference - (current / 100) * circumference;
+
+      circle.style.strokeDashoffset = offset;
+      text.innerText = current + "%";
+    }
+  }, 15);
+}
 
  nextButton.addEventListener("click", () => {
    currentQuestionIndex++;
@@ -115,13 +143,16 @@ function showQuestion() {
      showQuestion();
        currentElement.innerHTML = currentQuestionIndex + 1;
    } else {
+     header.style.display = "none";
      currentQuestionElement.style.display = "none";
      optionElement.style.display = "none";
      nextButton.style.display = "none";
+     circle.style.display = "block";
      currentElement.innerHTML = currentQuestionIndex;
      totalElement.innerHTML = questions.length;
      scoreElement.innerHTML = `${score} / ${questions.length}`;
      resultElement.style.display = "block";
+     showFinalScoreBar();
    }
  });
 
