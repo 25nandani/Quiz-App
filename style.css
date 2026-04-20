@@ -15,10 +15,10 @@
     width:90%;
     max-width: 600px;
     margin:100px auto 0;
-    height: 400px;
     border-radius: 20px;
     padding:2rem;
     animation: fadeIn 0.6s ease-in-out;
+
     
 }
 @keyframes fadeIn {
@@ -75,4 +75,28 @@
 .btn:hover {
   opacity: 0.92;
   transform: scale(1.04);
+}
+#question{
+    font-size: large;
+    margin-bottom:1rem;
+    
+}
+#options{
+    display:flex;
+    flex-direction: column;
+    background-color: #fff;
+    border:none;
+    border-radius: 2rem;
+    gap:1rem;
+    font-size:1rem;
+
+}
+.option-btn{
+    display: flex;
+    background-color: #8eb9fe;
+    padding:0.8rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+    border:none;
+    cursor: pointer;
 }
